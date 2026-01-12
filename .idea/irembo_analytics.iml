@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/include" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/_duckdb-stubs" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/adbc_driver_duckdb" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/dateutil" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/duckdb" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/duckdb-1.4.3.dist-info" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/numpy" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/numpy-2.4.1.dist-info" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/pandas" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/pandas-2.3.3.dist-info" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/python_dateutil-2.9.0.post0.dist-info" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/pytz" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/pytz-2025.2.dist-info" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/six-1.17.0.dist-info" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/tzdata" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/lib/python3.12/site-packages/tzdata-2025.3.dist-info" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.12 virtualenv at ~/irembo_analytics/venv" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
