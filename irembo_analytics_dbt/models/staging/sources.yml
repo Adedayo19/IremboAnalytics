@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw_data
+    tables:
+      - name: voice_sessions
+      - name: users
+      - name: voice_ai_metrics
+      - name: applications
+      - name: voice_turns

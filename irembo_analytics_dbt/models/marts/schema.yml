@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: fact_voice_ai_sessions
+    description: "A fact table containing voice AI session data, joined with user and application information."
+    columns:
+      - name: session_id
+        description: "Unique identifier for each voice AI session."
+        data_type: string
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "Unique identifier for each user."
+        data_type: string
+        tests:
+          - not_null
+      - name: region
+        description: "The region of the user."
+        data_type: string
+      - name: disability_flag
+        description: "A flag indicating if the user has a disability."
+        data_type: boolean
+      - name: first_time_digital_user
+        description: "A flag indicating if the user is a first-time digital user."
+        data_type: boolean
+      - name: language
+        description: "The language used in the session."
+        data_type: string
+      - name: total_turns
+        description: "The total number of turns in the session."
+        data_type: integer
+      - name: avg_asr_confidence
+        description: "The average ASR confidence score for the session."
+        data_type: float
+      - name: misunderstanding_rate
+        description: "The rate of misunderstandings in the session."
+        data_type: float
+      - name: escalation_flag
+        description: "A flag indicating if the session was escalated."
+        data_type: boolean
+      - name: service_code
+        description: "The service code of the application."
+        data_type: string
+      - name: app_status
+        description: "The status of the application."
+        data_type: string
+      - name: session_outcome
+        description: "The final outcome of the session."
+        data_type: string
+      - name: avg_turn_duration_sec
+        description: "The average duration of a turn in the session, in seconds."
+        data_type: float
+      - name: total_user_errors
+        description: "The total number of errors made by the user in the session."
+        data_type: integer
+      - name: is_success
+        description: "A flag indicating if the session was successful."
+        data_type: boolean

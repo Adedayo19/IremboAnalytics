@@ -1,12 +1,11 @@
 # Irembo Voice AI Analytics Project
 
-This project contains a data modeling pipeline to analyze voice AI interactions from Irembo. The goal is to build a flattened analytical table (`fact_voice_ai_sessions`) that joins together session data with user information, AI metrics, and final application outcomes.
+This project contains a dbt data modeling pipeline to analyze voice AI interactions from Irembo. The goal is to build a flattened analytical table (`fact_voice_ai_sessions`) that joins together session data with user information, AI metrics, and final application outcomes.
 
 ## Project Structure
 
 - `data/`: Contains the raw source data as CSV files.
-- `sql/`: Contains the SQL query used to build the final fact table.
-- `scripts/`: Contains the Python script to execute the data modeling pipeline.
+- `irembo_analytics_dbt/`: Contains the dbt project.
 - `outputs/`: Contains the exported CSV file of the final fact table.
 - `irembo_ai.db`: A DuckDB database file where the final table is stored.
 
@@ -18,17 +17,56 @@ This project contains a data modeling pipeline to analyze voice AI interactions 
     pip install -r requirements.txt
     ```
 
-2.  **Run the build script:**
+2.  **Run the dbt project:**
 
     ```bash
-    python scripts/build_model.py
+    cd irembo_analytics_dbt
+    dbt build
     ```
 
-    This script will:
+    This command will:
     - Connect to the `irembo_ai.db` DuckDB database.
-    - Execute the SQL query from `sql/fact_voice_ai_sessions.sql`.
-    - Create a table named `fact_voice_ai_sessions` in the database.
-    - Export the table to `outputs/fact_voice_ai_sessions.csv`.
+    - Build the `fact_voice_ai_sessions` model.
+
+## How to Query the Database
+
+You can query the `fact_voice_ai_sessions` table in the `irembo_ai.db` database in a few ways:
+
+### Using a Database Tool
+
+1.  Connect your SQL IDE (e.g., DBeaver, DataGrip, PyCharm's database tool) to the `irembo_ai.db` file.
+2.  Open a new query console.
+3.  Run a query:
+    ```sql
+    SELECT * FROM fact_voice_ai_sessions LIMIT 10;
+    ```
+
+### Using a Python Script
+
+1.  Create a Python script (e.g., `query_db.py`) in the project root.
+2.  Add the following code:
+    ```python
+    import duckdb
+    import os
+
+    # Define the path to your DuckDB database file
+    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+    DB_PATH = os.path.join(PROJECT_ROOT, 'irembo_ai.db')
+
+    # Connect to the DuckDB database
+    con = duckdb.connect(database=DB_PATH, read_only=True)
+
+    # Execute a query on your fact table
+    print("Querying fact_voice_ai_sessions:")
+    result = con.execute("SELECT * FROM fact_voice_ai_sessions LIMIT 5").fetchdf()
+
+    # Print the results
+    print(result)
+
+    # Close the connection
+    con.close()
+    ```
+3.  Run the script: `python query_db.py`
 
 ## Data Model
 

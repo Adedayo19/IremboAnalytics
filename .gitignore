@@ -1,2 +1,7 @@
 venv/
 .venv/
+
+# dbt
+irembo_analytics_dbt/dbt_packages/
+irembo_analytics_dbt/logs/
+irembo_analytics_dbt/target/

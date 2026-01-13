@@ -1,0 +1,10 @@
+# profiles.yml
+
+irembo_analytics_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../irembo_ai.db
+      settings:
+        FILE_SEARCH_PATH: "data"
