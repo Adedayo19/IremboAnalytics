@@ -21,6 +21,7 @@ turns AS (
 ),
 final AS (
     SELECT
+        md5(s.session_id || '_' || COALESCE(a.application_id, 'no_app') ) AS id,
         s.session_id,
         s.user_id,
         u.region,

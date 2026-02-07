@@ -4,11 +4,16 @@ models:
   - name: fact_voice_ai_sessions
     description: "A fact table containing voice AI session data, joined with user and application information."
     columns:
-      - name: session_id
-        description: "Unique identifier for each voice AI session."
+      - name: id
+        description: "Primary key for the fact table."
         data_type: string
         tests:
           - unique
+          - not_null
+      - name: session_id
+        description: "Identifier for each voice AI session."
+        data_type: string
+        tests:
           - not_null
       - name: user_id
         description: "Unique identifier for each user."

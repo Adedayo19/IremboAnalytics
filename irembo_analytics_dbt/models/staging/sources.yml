@@ -8,3 +8,35 @@ sources:
       - name: voice_ai_metrics
       - name: applications
       - name: voice_turns
+
+models:
+  - name: stg_voice_turns
+    description: "Staged voice turn data from raw CSV."
+    columns:
+      - name: session_id
+        description: "Foreign key to voice sessions."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_voice_sessions')
+              field: session_id
+
+  - name: stg_voice_ai_metrics
+    description: "Staged voice AI metrics data from raw CSV."
+    columns:
+      - name: session_id
+        description: "Foreign key to voice sessions."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_voice_sessions')
+              field: session_id
+
+  - name: stg_voice_sessions
+    description: "Staged voice session data from raw CSV."
+    columns:
+      - name: session_id
+        description: "Primary key for voice sessions."
+        tests:
+          - unique
+          - not_null
