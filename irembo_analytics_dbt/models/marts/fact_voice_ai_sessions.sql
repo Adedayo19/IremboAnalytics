@@ -37,8 +37,34 @@ final AS (
         s.session_outcome,
         t.avg_turn_duration_sec,
         t.total_user_errors,
+        -- Source columns for KPI reporting
+        a.channel,
+        a.time_to_submit_sec,
+        s.total_duration_sec,
+        s.created_at,
+        m.avg_intent_confidence,
+        m.silence_rate,
+        m.recovery_success,
         -- KPI Helper: Is this a successful interaction?
-        CASE WHEN s.session_outcome = 'completed' THEN 1 ELSE 0 END AS is_success
+        CASE WHEN s.session_outcome = 'completed' THEN 1 ELSE 0 END AS is_success,
+        -- KPI Helper: First-time digital user
+        CASE WHEN u.first_time_digital_user = 'yes' THEN 1 ELSE 0 END AS is_ftdu,
+        -- KPI Helper: Rural user
+        CASE WHEN u.region = 'rural' THEN 1 ELSE 0 END AS is_rural,
+        -- KPI Helper: Disabled user
+        CASE WHEN u.disability_flag = 'yes' THEN 1 ELSE 0 END AS is_disabled,
+        -- KPI Helper: Vulnerable user (disabled or rural)
+        CASE WHEN u.disability_flag = 'yes' OR u.region = 'rural' THEN 1 ELSE 0 END AS is_vulnerable,
+        -- KPI Helper: Session had errors
+        CASE WHEN m.misunderstanding_rate > 0 OR m.silence_rate > 0 THEN 1 ELSE 0 END AS has_errors,
+        -- KPI Helper: Recovered from errors
+        CASE
+            WHEN (m.misunderstanding_rate > 0 OR m.silence_rate > 0) AND m.recovery_success = 'yes' THEN 1
+            ELSE 0
+        END AS is_recovered,
+        -- KPI Helper: Repeat user
+        CASE WHEN COUNT(*) OVER (PARTITION BY s.user_id) > 1 THEN 1 ELSE 0 END AS is_repeat_user
+
     FROM sessions s
     LEFT JOIN users u ON s.user_id = u.user_id
     LEFT JOIN metrics m ON s.session_id = m.session_id

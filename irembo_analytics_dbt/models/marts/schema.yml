@@ -59,6 +59,72 @@ models:
       - name: total_user_errors
         description: "The total number of errors made by the user in the session."
         data_type: integer
+      - name: channel
+        description: "The channel through which the application was submitted (e.g., voice, web)."
+        data_type: string
+      - name: time_to_submit_sec
+        description: "Time in seconds from session start to application submission."
+        data_type: float
+      - name: total_duration_sec
+        description: "Total duration of the voice session in seconds."
+        data_type: float
+      - name: created_at
+        description: "Timestamp when the voice session was created."
+        data_type: timestamp
+      - name: avg_intent_confidence
+        description: "Average intent confidence score from the AI metrics."
+        data_type: float
+      - name: silence_rate
+        description: "Rate of silence periods during the session."
+        data_type: float
+      - name: recovery_success
+        description: "Whether the AI successfully recovered from errors during the session."
+        data_type: string
       - name: is_success
-        description: "A flag indicating if the session was successful."
-        data_type: boolean
+        description: "1 if the session outcome was completed, 0 otherwise."
+        data_type: integer
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: is_ftdu
+        description: "1 if the user is a first-time digital user, 0 otherwise. Supports FTDU Adoption Rate KPI."
+        data_type: integer
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: is_rural
+        description: "1 if the user is from a rural region, 0 otherwise. Supports Inclusion Success Gap KPI."
+        data_type: integer
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: is_disabled
+        description: "1 if the user has a disability, 0 otherwise. Supports User Diversity Ratio and Inclusion Success Gap KPIs."
+        data_type: integer
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: is_vulnerable
+        description: "1 if the user is disabled or from a rural region, 0 otherwise. Supports User Diversity Ratio KPI."
+        data_type: integer
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: has_errors
+        description: "1 if the session had misunderstandings or silence issues, 0 otherwise. Supports AI Recovery Success Rate KPI."
+        data_type: integer
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: is_recovered
+        description: "1 if the session had errors and the AI successfully recovered, 0 otherwise. Supports AI Recovery Success Rate KPI."
+        data_type: integer
+        tests:
+          - accepted_values:
+              values: [0, 1]
+      - name: is_repeat_user
+        description: "1 if the user has more than one session, 0 otherwise. Supports Repeat Usage Rate KPI."
+        data_type: integer
+        tests:
+          - accepted_values:
+              values: [0, 1]
